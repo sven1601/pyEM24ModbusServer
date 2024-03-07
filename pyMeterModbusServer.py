@@ -149,6 +149,7 @@ class Regs(DataBank):
 
         if 0 <= address <= 0xA100 and 0 < number < 80:
 
+            # Create return object with EM24 protocol
             dataArray = [
                 (int(round(meterValues.l1_volt * 10, 0)) & 0x0000FFFF), (int(meterValues.l1_volt * 10) & 0xFFFF0000) >> 16,
                 (int(round(meterValues.l2_volt * 10, 0)) & 0x0000FFFF), (int(meterValues.l2_volt * 10) & 0xFFFF0000) >> 16,
@@ -204,6 +205,7 @@ class Regs(DataBank):
                 0, 0
             ]
 
+            # Return only requested data
             return dataArray[address:address+number]
 
 
