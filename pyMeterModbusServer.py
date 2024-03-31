@@ -134,20 +134,22 @@ class Regs(DataBank):
 
         if address == 0x0B:
             return [0x670]  # Model 1648 -> EM24DINAV23XE1X
-        if address == 0x0302:
+        elif address == 0x0302:
             return [8 * 256 + 1 * 256 + 1]  # Version / Revision Measurement Module
-        if address == 0x0304:
+        elif address == 0x0304:
             return [8 * 256 + 6 * 256 + 1]  # Version / Revision Communication Module
-        if address == 0x1002:
+        elif address == 0x1002:
             return [0x00]  # System 3P.n
-        if address == 0x5000:
+        elif address == 0x5000:
             return [ord('B') * 256 + ord('V'), ord('0') * 256 + ord('4'), ord('2') * 256 + ord('0'),
                     ord('0') * 256 + ord('3'), ord('1') * 256 + ord('0'), ord('0') * 256 + ord('1'),
                     ord('1') * 256]  # SN-> BK0390085001X
-        if address == 0xA000:
+        elif address == 0xA000:
             return [0x07]  # Type of application
+        elif address == 0xA100:
+            return [0x03]  # switch locked
 
-        if 0 <= address <= 0xA100 and 0 < number < 80:
+        elif 0 <= address <= 0xA100 and 0 < number <= 80:
 
             # Create return object with EM24 protocol
             dataArray = [
@@ -205,6 +207,7 @@ class Regs(DataBank):
                 0, 0
             ]
 
+            #logging.info(dataArray[address:address+number])
             # Return only requested data
             return dataArray[address:address+number]
 
